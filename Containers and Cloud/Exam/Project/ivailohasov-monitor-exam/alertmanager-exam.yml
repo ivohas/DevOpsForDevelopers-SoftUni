@@ -1,0 +1,20 @@
+global:
+  resolve_timeout: 1m
+
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 1h
+  routes:
+    - match:
+        receiver: 'web.hook'
+      routes:
+        - match:
+            alertname: "your_alert_name" 
+          receiver: 'web.hook'
+        
+receivers:
+  - name: 'web.hook'
+    webhook_configs:
+      - url: 'https://webhook.site/#!/758cbfcb-2d0c-4364-b052-84d7190b1744'

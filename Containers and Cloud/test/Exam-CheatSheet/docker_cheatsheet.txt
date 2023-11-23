@@ -1,0 +1,118 @@
+# Docker commands cheatsheet
+
+### The basic docker commands
+* `docker pull [image]` - Pull image from internet
+* `docker run [image]` - Run the image
+* `docker images` - List all of the images
+* `docker ps` - 
+* `docker logs [container]` - See the logs for a container
+
+### Volumes
+* `docker volume create [name]` - Create a volume in docker
+* `docker volume ls` - List all volumes in docker
+* `docker volume inspect [name]` - Inspect the volume in docker
+* `docker run -p 5000:80 -d -v [name]:/app nginxdemos/hello` - Mount a volume to the `app` folder
+* `docker volume rm [name]` - Remove a volume
+
+### Networks
+* `doker network ls` - list the network
+* `docker network create --driver <driver-name> <bridge-name> [name]`- Create a network in docker
+* `docker network connect <network-name> <container-name or id>` - Connect a Docker container to an existing Network.
+* `docker network disconnect <network-name> <container-name>` - Disconnect a Docker container to an existing Network.
+* `docker network inspect [name]` - inspect a network
+* `docker network rm [name]` - Remove a docker network
+
+### Arguments:
+* `-d` - run in detached mode
+* `-it` - interactive mode
+* `-v` - mount a volume
+* `--name [name]` - specify a name for the container
+
+### Sample commands:
+* `docker exec -it [container] /bin/sh` - Start a interactive shell in a container
+* `docker run -p 5001:80 -v c:\users:/app nginxdemos/hello` - Attach container to a volume (app has files from c:\users)
+
+### Dockerfiles
+Simple Dockerfile:
+```Dockerfile
+FROM node:16
+ENV NODE_ENV=production
+WORKDIR /app
+COPY ["package.json", "package-lock.json*", "./"]
+RUN npm install --production
+COPY . .
+CMD [ "node", "server.js" ]
+```
+
+Keywords:
+* `FROM` - Create an image from another image `FROM <image> AS base`
+* `LABEL` - Add metadata in a key-value pair fashion `LABEL <key>=<value> <key>=<value> ...`
+* `RUN` - execute command `RUN [ "executable", "param1", "param2" ]`
+* `COPY` - copy different files in the image, like your source code `COPY ["<src>", ... "<dest>"]`
+* `ENTRYPOINT` - define which command starts the container `ENTRYPOINT executable param1 param2`
+* `WORKDIR` - the working directory of the image, where your files are `WORKDIR </path/to/workdir>`
+* `VOLUME` - defining a volume for the container `VOLUME ["<path>", ...]`
+* `ENV` - define enviroment variables `ENV <key>=<value>`
+* `CMD` - execute a command-line operation `CMD executable param1 param2`
+* `EXPOSE` - expose a port externaly `EXPOSE <port>`
+
+Dockerfile commands:
+* `docker image build [OPTIONS] PATH | URL | -` - Build an image
+* `docker images` - Inspect an image
+* `docker run -d image` - Run a container from the image
+* `docker push {username}/{app}` - Push to registry
+* `docker login` - Login to Docker Hub
+
+### Docker Compose
+```yaml
+version: "1.0"
+
+services:
+    wordpress_db:
+        image: mysql:latest # Set ready to use image
+        command: '--default-authentication-plugin=mysql_native_password'
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - my_network
+        restart: always
+        enviroment: # Set enviroment variables
+            - MYSQL_ROOT_PASSWORD=somewordpress
+            - MYSQL_DATABASE=wordpress
+            - MYSQL_USER=wordpress
+            - MYSQL_PASSWORD=wordpress
+        expose:
+            - 3306
+            - 33060
+    wordpress_site:
+        image: wordpress:latest
+        volumes: # Associate volume with a service
+            - wp_data:/var/www/html
+        networks:
+            - my_network
+        ports: # Expose ports
+            - 80:80
+        restart: always
+        enviroment:
+            - WORDPRESS_DB_HOST=wordpress_db
+            - WORDPRESS_DB_USER=wordpress
+            - WORDPRESS_DV_PASSWORD=wordpress
+            - WORDPRESS_DB_NAME=wordpress
+volumes: # Volumes
+    db_data:
+    wp_data:
+networks:
+    my_network:
+```
+
+Docker compose commands:
+* `docker-compose build` - Build all images
+* `docker-compose up` - Run the containers
+* `docker-compose up -d` - Run the containers in detached mode
+* `docker-compose ps` - Check if services are up and running
+* `docker-compose -f docker-compose.yml -f production.yml up -d` - Compose with multiple files
+* `docker-compose build web | docker-compose up --no-deps -d web` - Redeploy a single service
+* `docker-compose down --rmi all --volumes` - Remove everything
+
+You can use [`this`](https://www.composerize.com) website for composerizing commands.
+

@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+    slqserver:
+        environment:
+            - ACCEPT_EULA=Y
+            - 'MSSQL_SA_PASSWORD=myStrongPassword12#'
+        ports:
+            - '1433:1433'
+        deploy:
+          resources:
+            reservations:
+              cpus: '2'
+              memory: 2GB
+        volumes:
+            - 'sqldata:/var/opt/mssql/sqlserver'
+        container_name: sqlserver
+        image: mcr.microsoft.com/mssql/server 
+    webapp:
+        ports:
+            - '80:80'
+        container_name: webapp
+        restart: on-failure
+        image: ivailohasovhomiessc.azurecr.io/homies
+        domainname: ivailohasovhomies
+volumes:
+  sqldata:
+      driver: azure_file
+      driver_opts:
+        share_name: sql-volume
+        storage_account_name: ivailohasovhomiesstacc
+      

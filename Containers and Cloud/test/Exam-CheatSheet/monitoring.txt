@@ -1,0 +1,16 @@
+Monitoring
+Change context on default one
+docker run -d -p 9115:9115 quay.io/prometheus/blackbox-exporter
+Open prometheus the one in C: then code .
+Change some file
+prometheus.exe --config.file prometheus-exam.yml 
+Avelable in localhost:9000
+$ docker run --name alertmanager -d -p 127.0.0.1:9093:9093 quay.io/prometheus/alertmanager
+Then open again in VS code alert manager
+Change some the file 
+alertmanager.exe --config.file alertmanager-exam.yml
+
+Add new alert rule
+change file
+
+connect with grafana and export smthg

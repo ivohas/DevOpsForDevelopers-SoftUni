@@ -1,0 +1,31 @@
+1 Extract files
+2 Open with the Ide (for C# in VS or the others in VS Code)
+3 Create a docker file 
+ - 3.1 Check the docker file with the conditions 
+ - 3.2 Copy the docker file to the root directory
+4 Start CMD-(Terminal)
+ - 4.1 Go to the solution root
+ - 4.2 Build image in the current directory -- docker build -t {name} .
+ - 4.3 Run the container
+5 Docker Compose
+ - 5.1 Create a volume for the db (sql) -- docker volume create {name}-- option: sqldata
+ - 5.2 Start a server locally - config this command 
+	- docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=myStrongPassword12#" -p 1433:1433 -v sqldata:/var/opt/mssql/sqlserver --name sqlserver -d mcr.microsoft.com/mssql/server 
+ - 5.3 Open VS Code and create in the root directory docker-compose file
+ - 5.4 Open Composerize and paste the comand
+ - 5.5 Change the compose file for local use
+ - 5.6 Start the compose file locally -- docker-compose up -d
+ - 5.7 Change the docker compose file for azure deployment
+6 Login in Azure though the cmd - az login
+ - 6.1 Create a resourse group in west europe -- az group create --name {username}{name}srg --location westeurope
+ - 6.2 Create a container registry -- az acr create --resource-group {username}{name}srg --name {username}{name}sc --sku Basic
+ - 6.3 Rename the image -- docker tag contactss {username}{name}sc.azurecr.io/{smthg}
+ - 6.4 In the compose file change the image in web_app
+ - 6.5 Login in the container registry -- az acr login --name {username}{name}sc.azurecr.io
+ - 6.6 Push the smthg(image)?? - docker push {username}{name}sc.azurecr.io/{name}
+ - 6.7 Create an az context in the resourse group you created-- docker context create aci {name}azurectx
+ - 6.8 Change the context to the new one -- docker context use {name}azurectx
+ - 6.9 Put domain name 
+ - 6.10 Docker compose up -- docker-compose up -d
+7 Wait till is running
+ - Screenshots and dockerfiles in solution folder
