@@ -1,0 +1,25 @@
+Download the zip
+Open the files in Vs Code
+Download dependecies - npm install
+Start in localhost
+.gitignore node_modules
+Push to public repo in github
+Create a new branch 
+install playright 
+start the app in new cmd
+run the test 
+change to the new brach and fix the tests
+commit to the new brach and push it 
+make pull requist and merge the braches- dont delete the new branch 
+Open action and ad smth - node.js config
+Rename to pipeline and change the file
+Commit it and it will run automaticly in the actions
+Get vs code change the brach back to main and pull the chanegs
+Open the pipeline file and add func to dispaly your softuni name if needed
+For the cd open render add new web service choose the repository 
+Deploy it with render 
+Chnage the auto deploy from the settings
+open render deploy github actions in google 
+copy the job and past it in the pipeline
+Add needs to the job
+Ad secret key in the github repository from the settings
