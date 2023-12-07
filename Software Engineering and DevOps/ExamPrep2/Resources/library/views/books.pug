@@ -1,0 +1,8 @@
+include header.pug
+
+h1 Added Books
+ul
+  each b in books
+    li #{b.name} (#{b.author})
+
+include footer.pug

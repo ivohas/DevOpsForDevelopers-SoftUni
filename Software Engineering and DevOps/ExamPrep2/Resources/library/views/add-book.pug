@@ -1,0 +1,13 @@
+include header.pug
+
+h1 Add New Book
+form(method='POST' action='/add-book')
+  div
+    label(for='name') Name: 
+    input#name(type='text', name='name')
+  div
+    label(for='author') Author: 
+    input#author(type='text', name='author')
+  button(type='submit') Add
+
+include footer
