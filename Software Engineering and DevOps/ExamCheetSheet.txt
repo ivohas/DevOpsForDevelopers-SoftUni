@@ -17,9 +17,15 @@ Commit it and it will run automaticly in the actions
 Get vs code change the brach back to main and pull the chanegs
 Open the pipeline file and add func to dispaly your softuni name if needed
 For the cd open render add new web service choose the repository 
-Deploy it with render 
+Deploy it with render - npm install and npm run start
 Chnage the auto deploy from the settings
-open render deploy github actions in google 
+open render deploy github actions in google-- https://github.com/marketplace/actions/render-deploy-action
 copy the job and past it in the pipeline
 Add needs to the job
 Ad secret key in the github repository from the settings
+Add ui test in the ci/cd
+Add one more job in the pipeline
+Stop the server
+Change the link form the test
+Run the test if they run commit and push 
+
