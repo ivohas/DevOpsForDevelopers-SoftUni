@@ -57,7 +57,3 @@ Personal educational repository for learning purposes.
 - [Kubernetes Docs](https://kubernetes.io/docs/)
 - [DevOps Roadmap](https://roadmap.sh/devops)
 ```
-
-I've created a README that reflects the repository structure shown in the image, highlighting the DevOps and Containers learning modules. The document provides an overview of the learning journey while showcasing the technical skills and technologies explored.
-
-Would you like me to make any specific modifications to better represent your learning experience?
